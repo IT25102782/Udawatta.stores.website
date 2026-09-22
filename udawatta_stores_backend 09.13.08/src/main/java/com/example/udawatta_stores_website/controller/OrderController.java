@@ -63,6 +63,48 @@ public class OrderController {
 
 
     // =========================================================
+    // GET LOGGED-IN USER'S ORDERS
+    // =========================================================
+
+    @GetMapping("/my-orders")
+    public List<Order> getMyOrders(
+            @RequestHeader("Authorization")
+            String authorizationHeader
+    ) {
+
+
+        String token =
+                extractToken(
+                        authorizationHeader
+                );
+
+
+        Long loggedInUserId =
+                jwtUtil.getUserId(
+                        token
+                );
+
+
+        return orderRepository
+                .findByUserId(
+                        loggedInUserId
+                );
+    }
+
+
+    // =========================================================
+    // ADMIN - GET ALL ORDERS
+    // =========================================================
+
+    @GetMapping
+    public List<Order> getAllOrders() {
+
+        return orderRepository
+                .findAll();
+    }
+
+
+    // =========================================================
     // CUSTOMER INFORMATION VALIDATION
     // =========================================================
 
