@@ -16,6 +16,7 @@ public class Product {
 
     private String category;
 
+    private int stock;
 
 
 
@@ -65,7 +66,13 @@ public class Product {
     }
 
 
+    public int getStock() {
+        return stock;
+    }
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
 
 
