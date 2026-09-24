@@ -512,6 +512,94 @@ public class OrderController {
 
 
     // =========================================================
+    // ADMIN - UPDATE ORDER STATUS
+    // =========================================================
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateOrderStatus(
+            @PathVariable Long id,
+            @RequestBody String status
+    ) {
+
+
+        if (
+                status == null ||
+                        status.isBlank()
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Order status is required."
+                            )
+                    );
+        }
+
+
+        String cleanStatus =
+                status.trim()
+                        .toUpperCase();
+
+
+        // Only allow statuses used by AdminOrders
+        if (
+                !ALLOWED_STATUSES.contains(
+                        cleanStatus
+                )
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Invalid order status."
+                            )
+                    );
+        }
+
+
+        Order order =
+                orderRepository
+                        .findById(id)
+                        .orElse(null);
+
+
+        if (
+                order == null
+        ) {
+
+            return ResponseEntity
+                    .status(404)
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Order not found."
+                            )
+                    );
+        }
+
+
+        order.setStatus(
+                cleanStatus
+        );
+
+
+        Order updatedOrder =
+                orderRepository.save(
+                        order
+                );
+
+
+        return ResponseEntity.ok(
+                updatedOrder
+        );
+    }
+
+
+    // =========================================================
     // CUSTOMER INFORMATION VALIDATION
     // =========================================================
 
