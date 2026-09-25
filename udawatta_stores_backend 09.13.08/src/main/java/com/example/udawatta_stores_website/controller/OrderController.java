@@ -600,6 +600,45 @@ public class OrderController {
 
 
     // =========================================================
+    // ADMIN - DELETE ORDER
+    // =========================================================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOrder(
+            @PathVariable Long id
+    ) {
+
+
+        if (
+                !orderRepository.existsById(id)
+        ) {
+
+            return ResponseEntity
+                    .status(404)
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Order not found."
+                            )
+                    );
+        }
+
+
+        orderRepository.deleteById(
+                id
+        );
+
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "message",
+                        "Order deleted successfully."
+                )
+        );
+    }
+
+
+    // =========================================================
     // CUSTOMER INFORMATION VALIDATION
     // =========================================================
 
