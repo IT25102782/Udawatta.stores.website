@@ -127,3 +127,138 @@ public class OrderController {
                         order.getOrderItems().isBlank()
         ) {
 
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Order does not contain any products."
+                            )
+                    );
+        }
+
+
+        // =====================================================
+        // 4. PARSE PRODUCTS + QUANTITIES
+        // =====================================================
+
+        Map<String, Integer> requestedItems =
+                new LinkedHashMap<>();
+
+
+        Matcher matcher =
+                ORDER_ITEM_PATTERN.matcher(
+                        order.getOrderItems()
+                );
+
+
+        while (
+                matcher.find()
+        ) {
+
+            String productName =
+                    matcher.group(1)
+                            .trim();
+
+
+            int quantity;
+
+            try {
+
+                quantity =
+                        Integer.parseInt(
+                                matcher.group(2)
+                        );
+
+            } catch (
+                    NumberFormatException exception
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        "Invalid product quantity."
+                                )
+                        );
+            }
+
+
+            if (
+                    quantity <= 0
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        "Invalid quantity for "
+                                                + productName
+                                )
+                        );
+            }
+
+
+            // Prevent excessively large quantity
+            if (
+                    quantity > 100
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        "Maximum quantity per product is 100."
+                                )
+                        );
+            }
+
+
+            requestedItems.merge(
+                    productName,
+                    quantity,
+                    Integer::sum
+            );
+        }
+
+
+        if (
+                requestedItems.isEmpty()
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Unable to read order items."
+                            )
+                    );
+        }
+
+
+        // =====================================================
+        // 5. VALIDATE PRODUCTS
+        // =====================================================
+
+        List<Product> products =
+                new ArrayList<>();
+
+
+        Map<Long, Integer> quantitiesByProductId =
+                new LinkedHashMap<>();
+
+
+        BigDecimal serverTotal =
+                BigDecimal.ZERO;
+
+
+        for (
+                Map.Entry<String, Integer> entry
+                        : requestedItems.entrySet()
+        ) {
+
+
