@@ -51,6 +51,100 @@ public class PaymentController {
 
 
     // =========================================================
+    // 1. GENERATE PAYHERE PAYMENT HASH
+    // =========================================================
+
+    @GetMapping("/hash/{orderId}")
+    public ResponseEntity<?> generatePaymentHash(
+            @PathVariable Long orderId
+    ) {
+
+        Order order = orderRepository
+                .findById(orderId)
+                .orElse(null);
+
+
+        if (order == null) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "error",
+                                    "Order not found"
+                            )
+                    );
+        }
+
+
+        String amountFormatted =
+                String.format(
+                        Locale.US,
+                        "%.2f",
+                        order.getTotalAmount()
+                );
+
+
+        String hashedSecret =
+                md5(merchantSecret);
+
+
+        String hash =
+                md5(
+                        merchantId
+                                + order.getId()
+                                + amountFormatted
+                                + currency
+                                + hashedSecret
+                );
+
+
+        Map<String, String> response =
+                new HashMap<>();
+
+
+        response.put(
+                "merchantId",
+                merchantId
+        );
+
+        response.put(
+                "orderId",
+                order.getId().toString()
+        );
+
+        response.put(
+                "amount",
+                amountFormatted
+        );
+
+        response.put(
+                "currency",
+                currency
+        );
+
+        response.put(
+                "hash",
+                hash
+        );
+
+        response.put(
+                "checkoutUrl",
+                checkoutUrl
+        );
+
+        response.put(
+                "notifyUrl",
+                notifyUrl
+        );
+
+
+        return ResponseEntity.ok(response);
+    }
+
+
+
+    // =========================================================
     // MD5 HELPER
     // =========================================================
 
