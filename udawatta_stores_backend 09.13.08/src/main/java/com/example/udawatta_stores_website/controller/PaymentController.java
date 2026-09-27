@@ -145,6 +145,228 @@ public class PaymentController {
 
 
     // =========================================================
+    // 2. PAYHERE PAYMENT NOTIFICATION
+    // =========================================================
+
+    @PostMapping(
+            value = "/notify",
+            consumes =
+                    MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public ResponseEntity<String> handlePaymentNotification(
+            @RequestParam Map<String, String> params
+    ) {
+
+        String receivedMerchantId =
+                params.get("merchant_id");
+
+        String orderId =
+                params.get("order_id");
+
+        String paymentId =
+                params.get("payment_id");
+
+        String payhereAmount =
+                params.get("payhere_amount");
+
+        String payhereCurrency =
+                params.get("payhere_currency");
+
+        String statusCode =
+                params.get("status_code");
+
+        String receivedMd5sig =
+                params.get("md5sig");
+
+
+        if (
+                receivedMerchantId == null ||
+                        orderId == null ||
+                        payhereAmount == null ||
+                        payhereCurrency == null ||
+                        statusCode == null ||
+                        receivedMd5sig == null
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            "Missing payment information"
+                    );
+        }
+
+
+        // =============================
+        // Generate local checksum
+        // =============================
+
+        String hashedSecret =
+                md5(merchantSecret);
+
+
+        String localMd5sig =
+                md5(
+                        receivedMerchantId
+                                + orderId
+                                + payhereAmount
+                                + payhereCurrency
+                                + statusCode
+                                + hashedSecret
+                );
+
+
+        // =============================
+        // Verify PayHere notification
+        // =============================
+
+        if (
+                !localMd5sig.equalsIgnoreCase(
+                        receivedMd5sig
+                )
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            "Invalid payment signature"
+                    );
+        }
+
+
+        Long databaseOrderId;
+
+        try {
+
+            databaseOrderId =
+                    Long.parseLong(orderId);
+
+        } catch (NumberFormatException e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            "Invalid order ID"
+                    );
+        }
+
+
+        Order order =
+                orderRepository
+                        .findById(databaseOrderId)
+                        .orElse(null);
+
+
+        if (order == null) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            "Order not found"
+                    );
+        }
+
+
+        // =============================
+        // PAYMENT STATUS
+        // =============================
+
+        switch (statusCode) {
+
+            // PAYMENT SUCCESS
+            case "2":
+
+                order.setPaymentStatus("PAID");
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+
+                order.setPaymentId(
+                        paymentId
+                );
+
+                break;
+
+
+            // PAYMENT PENDING
+            case "0":
+
+                order.setPaymentStatus(
+                        "PENDING"
+                );
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+
+                break;
+
+
+            // PAYMENT CANCELLED
+            case "-1":
+
+                order.setPaymentStatus(
+                        "CANCELLED"
+                );
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+
+                break;
+
+
+            // PAYMENT FAILED
+            case "-2":
+
+                order.setPaymentStatus(
+                        "FAILED"
+                );
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+
+                break;
+
+
+            // CHARGEBACK
+            case "-3":
+
+                order.setPaymentStatus(
+                        "CHARGEDBACK"
+                );
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+
+                break;
+
+
+            default:
+
+                order.setPaymentStatus(
+                        "UNKNOWN"
+                );
+
+                order.setPaymentMethod(
+                        "ONLINE"
+                );
+        }
+
+
+        orderRepository.save(order);
+
+
+        return ResponseEntity.ok(
+                "Payment notification processed"
+        );
+    }
+
+
+
+    // =========================================================
     // MD5 HELPER
     // =========================================================
 
