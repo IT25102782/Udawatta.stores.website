@@ -262,3 +262,133 @@ public class OrderController {
         ) {
 
 
+            String productName =
+                    entry.getKey();
+
+
+            int requestedQuantity =
+                    entry.getValue();
+
+
+            Product product =
+                    productRepository
+                            .findByNameIgnoreCase(
+                                    productName
+                            )
+                            .orElse(null);
+
+
+            // Product missing
+            if (
+                    product == null
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        productName
+                                                + " is no longer available."
+                                )
+                        );
+            }
+
+
+            // Out of stock
+            if (
+                    product.getStock() <= 0
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        product.getName()
+                                                + " is out of stock."
+                                )
+                        );
+            }
+
+
+            // Not enough stock
+            if (
+                    product.getStock()
+                            < requestedQuantity
+            ) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body(
+                                Map.of(
+                                        "message",
+                                        "Only "
+                                                + product.getStock()
+                                                + " "
+                                                + product.getName()
+                                                + " available in stock."
+                                )
+                        );
+            }
+
+
+            // Calculate using DB price
+            BigDecimal productPrice =
+                    BigDecimal.valueOf(
+                            product.getPrice()
+                    );
+
+
+            BigDecimal itemTotal =
+                    productPrice.multiply(
+                            BigDecimal.valueOf(
+                                    requestedQuantity
+                            )
+                    );
+
+
+            serverTotal =
+                    serverTotal.add(
+                            itemTotal
+                    );
+
+
+            products.add(
+                    product
+            );
+
+
+            quantitiesByProductId.put(
+                    product.getId(),
+                    requestedQuantity
+            );
+        }
+
+
+        // =====================================================
+        // 6. REDUCE STOCK
+        // =====================================================
+
+        for (
+                Product product : products
+        ) {
+
+            int quantity =
+                    quantitiesByProductId.get(
+                            product.getId()
+                    );
+
+
+            product.setStock(
+                    product.getStock()
+                            - quantity
+            );
+        }
+
+
+        productRepository.saveAll(
+                products
+        );
+
+
