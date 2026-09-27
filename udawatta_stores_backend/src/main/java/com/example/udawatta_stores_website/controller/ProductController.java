@@ -72,6 +72,77 @@ public class ProductController {
 
 
     // =========================================================
+    // DASHBOARD STATISTICS
+    // =========================================================
+
+    @GetMapping("/stats")
+    public Map<String, Long> getDashboardStats() {
+
+        List<Product> products =
+                productService.getAllProducts();
+
+
+        long totalProducts =
+                products.size();
+
+
+        long lowStockCount =
+                products.stream()
+                        .filter(
+                                product ->
+                                        product.getStock() > 0 &&
+                                                product.getStock() < 5
+                        )
+                        .count();
+
+
+        long outOfStockCount =
+                products.stream()
+                        .filter(
+                                product ->
+                                        product.getStock() == 0
+                        )
+                        .count();
+
+
+        long totalUnits =
+                products.stream()
+                        .mapToLong(
+                                Product::getStock
+                        )
+                        .sum();
+
+
+        Map<String, Long> stats =
+                new HashMap<>();
+
+
+        stats.put(
+                "totalProducts",
+                totalProducts
+        );
+
+        stats.put(
+                "lowStock",
+                lowStockCount
+        );
+
+        stats.put(
+                "outOfStock",
+                outOfStockCount
+        );
+
+        stats.put(
+                "totalUnits",
+                totalUnits
+        );
+
+
+        return stats;
+    }
+
+
+    // =========================================================
     // PRODUCT VALIDATION
     // =========================================================
 
