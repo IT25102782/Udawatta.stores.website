@@ -143,6 +143,70 @@ public class ProductController {
 
 
     // =========================================================
+    // ADD PRODUCT
+    // =========================================================
+
+    @PostMapping
+    public ResponseEntity<?> addProduct(
+            @RequestBody Product product
+    ) {
+
+
+        // Validate input
+        String validationError =
+                validateProduct(product);
+
+
+        if (validationError != null) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    validationError
+                            )
+                    );
+        }
+
+
+        // Clean text input
+        cleanProductData(product);
+
+
+        // Check duplicate product name
+        Optional<Product> existingProduct =
+                productRepository
+                        .findByNameIgnoreCase(
+                                product.getName()
+                        );
+
+
+        if (existingProduct.isPresent()) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "A product with this name already exists."
+                            )
+                    );
+        }
+
+
+        Product savedProduct =
+                productService
+                        .saveProduct(product);
+
+
+        return ResponseEntity.ok(
+                savedProduct
+        );
+    }
+
+
+    // =========================================================
     // PRODUCT VALIDATION
     // =========================================================
 
