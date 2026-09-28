@@ -15,4 +15,6 @@ public interface ReviewRepository
     List<Review> findByProductIdOrderByCreatedAtDesc(
             Long productId
     );
+
+    List<Review> findAllByOrderByCreatedAtDesc();
 }
