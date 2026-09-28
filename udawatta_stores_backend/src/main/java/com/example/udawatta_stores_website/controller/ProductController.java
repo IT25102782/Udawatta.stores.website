@@ -207,6 +207,167 @@ public class ProductController {
 
 
     // =========================================================
+    // UPDATE PRODUCT
+    // =========================================================
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(
+            @PathVariable Long id,
+            @RequestBody Product productDetails
+    ) {
+
+
+        Optional<Product> existingProductOptional =
+                productRepository.findById(id);
+
+
+        if (existingProductOptional.isEmpty()) {
+
+            return ResponseEntity
+                    .status(404)
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Product not found."
+                            )
+                    );
+        }
+
+
+        // Validate new values
+        String validationError =
+                validateProduct(
+                        productDetails
+                );
+
+
+        if (validationError != null) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    validationError
+                            )
+                    );
+        }
+
+
+        cleanProductData(
+                productDetails
+        );
+
+
+        // Check whether another product
+        // already uses this name
+        Optional<Product> sameNameProduct =
+                productRepository
+                        .findByNameIgnoreCase(
+                                productDetails.getName()
+                        );
+
+
+        if (
+                sameNameProduct.isPresent() &&
+                        !sameNameProduct
+                                .get()
+                                .getId()
+                                .equals(id)
+        ) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Another product with this name already exists."
+                            )
+                    );
+        }
+
+
+        Product product =
+                existingProductOptional.get();
+
+
+        product.setName(
+                productDetails.getName()
+        );
+
+        product.setDescription(
+                productDetails.getDescription()
+        );
+
+        product.setPrice(
+                productDetails.getPrice()
+        );
+
+        product.setCategory(
+                productDetails.getCategory()
+        );
+
+        product.setStock(
+                productDetails.getStock()
+        );
+
+        product.setImage(
+                productDetails.getImage()
+        );
+
+
+        Product updatedProduct =
+                productRepository.save(
+                        product
+                );
+
+
+        return ResponseEntity.ok(
+                updatedProduct
+        );
+    }
+
+
+    // =========================================================
+    // DELETE PRODUCT
+    // =========================================================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(
+            @PathVariable Long id
+    ) {
+
+
+        if (
+                !productRepository.existsById(id)
+        ) {
+
+            return ResponseEntity
+                    .status(404)
+                    .body(
+                            Map.of(
+                                    "message",
+                                    "Product not found."
+                            )
+                    );
+        }
+
+
+        productRepository.deleteById(
+                id
+        );
+
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "message",
+                        "Product deleted successfully."
+                )
+        );
+    }
+
+
+    // =========================================================
     // PRODUCT VALIDATION
     // =========================================================
 
