@@ -392,3 +392,138 @@ public class OrderController {
         );
 
 
+        // =====================================================
+        // 7. SERVER-SIDE TOTAL
+        // =====================================================
+
+        serverTotal =
+                serverTotal.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                );
+
+
+        // Ignore totalAmount sent by frontend
+        order.setTotalAmount(
+                serverTotal.doubleValue()
+        );
+
+
+        // =====================================================
+        // 8. PREPARE ORDER
+        // =====================================================
+
+        order.setOrderDate(
+                LocalDateTime.now()
+        );
+
+
+        // Frontend cannot choose order status
+        order.setStatus(
+                "PENDING"
+        );
+
+
+        // Current localhost payment option
+        order.setPaymentMethod(
+                "COD"
+        );
+
+
+        order.setPaymentStatus(
+                "PENDING"
+        );
+
+
+        // =====================================================
+        // 9. SAVE ORDER
+        // =====================================================
+
+        Order savedOrder =
+                orderRepository.save(
+                        order
+                );
+
+
+        return ResponseEntity.ok(
+                savedOrder
+        );
+    }
+
+
+    // =========================================================
+    // CUSTOMER INFORMATION VALIDATION
+    // =========================================================
+
+    private String validateCustomerInformation(
+            Order order
+    ) {
+
+
+        // Full name
+        if (
+                order.getCustomerName() == null ||
+                        order.getCustomerName().isBlank()
+        ) {
+
+            return "Customer name is required.";
+        }
+
+
+        String customerName =
+                order.getCustomerName()
+                        .trim();
+
+
+        if (
+                customerName.length() < 2 ||
+                        customerName.length() > 100
+        ) {
+
+            return "Customer name must contain between 2 and 100 characters.";
+        }
+
+
+        if (
+                !customerName.matches(
+                        "[\\p{L} .'-]+"
+                )
+        ) {
+
+            return "Customer name contains invalid characters.";
+        }
+
+
+        // Address
+        if (
+                order.getAddress() == null ||
+                        order.getAddress().isBlank()
+        ) {
+
+            return "Delivery address is required.";
+        }
+
+
+        String address =
+                order.getAddress()
+                        .trim();
+
+
+        if (
+                address.length() < 5 ||
+                        address.length() > 300
+        ) {
+
+            return "Delivery address must contain between 5 and 300 characters.";
+        }
+
+
+        // Postal code
+        if (
+                order.getPostalCode() == null ||
+                        order.getPostalCode().isBlank()
+        ) {
+
+            return "Postal code is required.";
+        }
+
