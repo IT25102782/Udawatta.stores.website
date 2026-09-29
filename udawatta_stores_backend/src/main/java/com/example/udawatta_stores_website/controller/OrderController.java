@@ -527,3 +527,135 @@ public class OrderController {
             return "Postal code is required.";
         }
 
+
+        String postalCode =
+                order.getPostalCode()
+                        .trim();
+
+
+        if (
+                !postalCode.matches(
+                        "\\d{5}"
+                )
+        ) {
+
+            return "Postal code must contain exactly 5 digits.";
+        }
+
+
+        // Phone
+        if (
+                order.getPhone() == null ||
+                        order.getPhone().isBlank()
+        ) {
+
+            return "Phone number is required.";
+        }
+
+
+        String normalizedPhone =
+                normalizePhone(
+                        order.getPhone()
+                );
+
+
+        // Accept:
+        // 0771234567
+        // +94771234567
+        if (
+                !normalizedPhone.matches(
+                        "^(?:0\\d{9}|\\+94\\d{9})$"
+                )
+        ) {
+
+            return "Please enter a valid Sri Lankan phone number.";
+        }
+
+
+        return null;
+    }
+
+
+    // =========================================================
+    // CLEAN ORDER INFORMATION
+    // =========================================================
+
+    private void cleanOrderInformation(
+            Order order
+    ) {
+
+
+        order.setCustomerName(
+                order.getCustomerName()
+                        .trim()
+        );
+
+
+        order.setAddress(
+                order.getAddress()
+                        .trim()
+        );
+
+
+        order.setPostalCode(
+                order.getPostalCode()
+                        .trim()
+        );
+
+
+        order.setPhone(
+                normalizePhone(
+                        order.getPhone()
+                )
+        );
+    }
+
+
+    // =========================================================
+    // NORMALIZE PHONE
+    // =========================================================
+
+    private String normalizePhone(
+            String phone
+    ) {
+
+
+        if (
+                phone == null
+        ) {
+
+            return "";
+        }
+
+
+        return phone
+                .trim()
+                .replace(" ", "")
+                .replace("-", "");
+    }
+
+
+    // =========================================================
+    // JWT HELPER
+    // =========================================================
+
+    private String extractToken(
+            String authorizationHeader
+    ) {
+
+
+        if (
+                authorizationHeader == null ||
+                        !authorizationHeader.startsWith("Bearer ")
+        ) {
+
+            throw new RuntimeException(
+                    "Invalid authorization header"
+            );
+        }
+
+
+        return authorizationHeader
+                .substring(7);
+    }
+}
