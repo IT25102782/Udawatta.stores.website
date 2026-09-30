@@ -508,6 +508,108 @@ const AdminDashboard = () => {
                         </section>
 
 
+                        {/* RECENT ORDERS */}
+
+                        <section className="dashboard-panel">
+
+                            <div className="dashboard-panel-header">
+
+                                <div>
+                                    <span>
+                                        LATEST ACTIVITY
+                                    </span>
+
+                                    <h2>
+                                        Recent Orders
+                                    </h2>
+                                </div>
+
+                                <Link to="/admin/orders">
+                                    View All →
+                                </Link>
+
+                            </div>
+
+
+                            {recentOrders.length === 0 ? (
+
+                                <div className="dashboard-empty">
+                                    No orders available yet.
+                                </div>
+
+                            ) : (
+
+                                <div className="dashboard-orders-table-wrapper">
+
+                                    <table className="dashboard-orders-table">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Customer</th>
+                                            <th>Total</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {recentOrders.map(
+                                            (order) => (
+
+                                                <tr key={order.id}>
+
+                                                    <td>
+                                                        #{order.id}
+                                                    </td>
+
+                                                    <td>
+                                                        {order.customerName}
+                                                    </td>
+
+                                                    <td>
+                                                        Rs.{" "}
+                                                        {formatPrice(
+                                                            order.totalAmount
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        {formatDate(
+                                                            order.orderDate
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+
+                                                        <span
+                                                            className={`dashboard-status ${
+                                                                order.status
+                                                                    ? order.status.toLowerCase()
+                                                                    : "pending"
+                                                            }`}
+                                                        >
+                                                            {order.status ||
+                                                                "PENDING"}
+                                                        </span>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            )
+                                        )}
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            )}
+
+                        </section>
 
                     </>
 
