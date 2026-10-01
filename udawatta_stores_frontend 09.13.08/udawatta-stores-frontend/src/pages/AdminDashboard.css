@@ -230,3 +230,276 @@
 }
 
 
+/* STATS */
+
+.dashboard-stats {
+    max-width: 1400px;
+
+    margin: 0 auto 24px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+}
+
+.dashboard-stat-card {
+    padding: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: white;
+
+    border:
+            1px solid #e5ebe3;
+
+    border-radius: 15px;
+
+    box-shadow:
+            0 7px 24px
+            rgba(0, 0, 0, 0.04);
+
+    transition: 0.3s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+            0 13px 30px
+            rgba(27, 70, 35, 0.08);
+}
+
+.dashboard-stat-icon {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #edf6ea;
+
+    border-radius: 13px;
+
+    font-size: 23px;
+}
+
+.dashboard-stat-card > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.dashboard-stat-card span {
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.dashboard-stat-card strong {
+    margin: 3px 0;
+
+    color: #183e26;
+
+    font-size: 25px;
+}
+
+.dashboard-stat-card small {
+    color: #aaa;
+
+    font-size: 9px;
+}
+
+
+/* MIDDLE */
+
+.dashboard-middle-grid {
+    max-width: 1400px;
+
+    margin: 0 auto 24px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.dashboard-panel {
+    max-width: 1400px;
+
+    margin: 0 auto 24px;
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+            1px solid #e4ebe2;
+
+    border-radius: 16px;
+
+    box-shadow:
+            0 8px 26px
+            rgba(0, 0, 0, 0.04);
+}
+
+.dashboard-middle-grid .dashboard-panel {
+    width: 100%;
+
+    margin: 0;
+}
+
+.dashboard-panel-header {
+    margin-bottom: 23px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+}
+
+.dashboard-panel-header h2 {
+    margin: 4px 0 0;
+
+    color: #252525;
+
+    font-size: 21px;
+}
+
+.dashboard-panel-header > a {
+    color: #2e7d32;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* INVENTORY */
+
+.inventory-overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.inventory-overview > div {
+    padding: 22px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    background: #f7faf5;
+
+    border-radius: 12px;
+}
+
+.inventory-overview strong {
+    color: #236633;
+
+    font-size: 26px;
+}
+
+.inventory-overview span {
+    margin-top: 5px;
+
+    color: #7d847e;
+
+    font-size: 10px;
+}
+
+
+/* QUICK ACTIONS */
+
+.dashboard-quick-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.dashboard-quick-actions a {
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    color: #333;
+
+    text-decoration: none;
+
+    background: #f8faf7;
+
+    border-radius: 10px;
+
+    transition: 0.25s ease;
+}
+
+.dashboard-quick-actions a:hover {
+    background: #eef6eb;
+
+    transform: translateX(3px);
+}
+
+.dashboard-quick-actions > a > span {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+
+    border-radius: 9px;
+}
+
+.dashboard-quick-actions a div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.dashboard-quick-actions strong {
+    font-size: 12px;
+}
+
+.dashboard-quick-actions small {
+    margin-top: 2px;
+
+    color: #999;
+
+    font-size: 9px;
+}
+
+
