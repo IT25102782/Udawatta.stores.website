@@ -113,3 +113,122 @@ const Cart = () => {
 
                             {cartItems.map((item) => (
 
+                                <article
+                                    className="modern-cart-item"
+                                    key={item.id}
+                                >
+
+                                    {/* Product image */}
+
+                                    <Link
+                                        to={`/products/${item.id}`}
+                                        className="cart-product-image"
+                                    >
+                                        <img
+                                            src={
+                                                item.image ||
+                                                "https://placehold.co/300x300?text=No+Image"
+                                            }
+                                            alt={item.name}
+                                            onError={(event) => {
+                                                event.currentTarget.src =
+                                                    "https://placehold.co/300x300?text=No+Image";
+                                            }}
+                                        />
+                                    </Link>
+
+
+                                    {/* Product information */}
+
+                                    <div className="cart-product-info">
+
+                                        <span className="cart-product-category">
+                                            {item.category || "Product"}
+                                        </span>
+
+                                        <Link
+                                            to={`/products/${item.id}`}
+                                            className="cart-product-name"
+                                        >
+                                            {item.name}
+                                        </Link>
+
+                                        <div className="cart-item-mobile-price">
+                                            Rs. {formatPrice(item.price)}
+                                        </div>
+
+                                        <div className="cart-product-meta">
+
+                                            <div>
+                                                <span>
+                                                    Quantity
+                                                </span>
+
+                                                <strong>
+                                                    {item.quantity}
+                                                </strong>
+                                            </div>
+
+                                            {item.stock !== undefined && (
+                                                <div>
+                                                    <span>
+                                                        Stock
+                                                    </span>
+
+                                                    <strong>
+                                                        {item.stock}
+                                                    </strong>
+                                                </div>
+                                            )}
+
+                                        </div>
+
+
+                                        <button
+                                            className="cart-remove-button"
+                                            onClick={() =>
+                                                removeFromCart(item.id)
+                                            }
+                                        >
+                                            Remove
+                                        </button>
+
+                                    </div>
+
+
+                                    {/* Price */}
+
+                                    <div className="cart-item-price">
+
+                                        <span>
+                                            Rs. {formatPrice(item.price)}
+                                        </span>
+
+                                        <strong>
+                                            Rs.{" "}
+                                            {formatPrice(
+                                                Number(item.price) *
+                                                Number(item.quantity)
+                                            )}
+                                        </strong>
+
+                                        <small>
+                                            subtotal
+                                        </small>
+
+                                    </div>
+
+                                </article>
+
+                            ))}
+
+                        </div>
+
+
+                        <Link
+                            to="/products"
+                            className="back-shopping-link"
+                        >
+                            ← Continue Shopping
+                        </Link>
+
