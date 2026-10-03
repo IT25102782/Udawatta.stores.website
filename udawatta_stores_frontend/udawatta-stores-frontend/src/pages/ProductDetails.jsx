@@ -429,7 +429,775 @@ const ProductDetails = () => {
     }
 
 
-    return null;
+    return (
+
+        <div className="product-details-page">
+
+
+            {/* ===================================
+                BREADCRUMB
+            =================================== */}
+
+            <div className="product-breadcrumb">
+
+                <Link to="/">
+                    Home
+                </Link>
+
+                <span>›</span>
+
+                <Link to="/products">
+                    Products
+                </Link>
+
+                <span>›</span>
+
+                <span>
+                    {product.name}
+                </span>
+
+            </div>
+
+
+            {/* ===================================
+                MAIN PRODUCT
+            =================================== */}
+
+            <section className="product-detail-main">
+
+
+                {/* PRODUCT IMAGE */}
+
+                <div
+                    className="product-detail-image-section"
+                    data-aos="fade-right"
+                >
+
+                    <div className="product-detail-image">
+
+                        <img
+                            src={
+                                product.image ||
+                                "https://placehold.co/700x700?text=No+Image"
+                            }
+                            alt={product.name}
+                            onError={(event) => {
+
+                                event.currentTarget.src =
+                                    "https://placehold.co/700x700?text=No+Image";
+
+                            }}
+                        />
+
+                    </div>
+
+
+                    <div className="image-quality-note">
+
+                        <span>
+                            🌿
+                        </span>
+
+                        <p>
+                            Fresh quality products
+                            selected for Udawatta
+                            Stores customers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {/* PRODUCT INFORMATION */}
+
+                <div
+                    className="product-detail-info"
+                    data-aos="fade-left"
+                >
+
+                    <div className="detail-top-row">
+
+                        <span className="detail-category">
+                            {product.category}
+                        </span>
+
+
+                        <span
+                            className={
+                                product.stock > 0
+                                    ? "detail-stock available"
+                                    : "detail-stock unavailable"
+                            }
+                        >
+
+                            {product.stock > 0
+                                ? "In Stock"
+                                : "Out of Stock"}
+
+                        </span>
+
+                    </div>
+
+
+                    <h1>
+                        {product.name}
+                    </h1>
+
+
+                    <div className="detail-rating">
+
+                        <small>
+
+                            {reviews.length > 0
+                                ? `${averageRating.toFixed(1)} / 5 · ${reviews.length} review${
+                                    reviews.length === 1
+                                        ? ""
+                                        : "s"
+                                }`
+                                : "No customer reviews yet"}
+
+                        </small>
+
+                    </div>
+
+
+                    <div className="detail-price">
+
+                        Rs.{" "}
+                        {Number(
+                            product.price
+                        ).toLocaleString()}
+
+                    </div>
+
+
+                    <div className="detail-divider">
+                    </div>
+
+
+                    <div className="detail-description">
+
+                        <h3>
+                            Product Description
+                        </h3>
+
+                        <p>
+
+                            {product.description ||
+                                "Fresh quality product available from Udawatta Stores."}
+
+                        </p>
+
+                    </div>
+
+
+                    <div className="detail-stock-info">
+
+                        <span>
+                            Available quantity
+                        </span>
+
+                        <strong>
+                            {product.stock}
+                        </strong>
+
+                    </div>
+
+
+                    {/* QUANTITY */}
+
+                    {product.stock > 0 && (
+
+                        <div className="detail-purchase">
+
+                            <div className="detail-quantity">
+
+                                <button
+                                    onClick={
+                                        decreaseQuantity
+                                    }
+                                    disabled={
+                                        quantity <= 1
+                                    }
+                                >
+                                    −
+                                </button>
+
+                                <span>
+                                    {quantity}
+                                </span>
+
+                                <button
+                                    onClick={
+                                        increaseQuantity
+                                    }
+                                    disabled={
+                                        quantity >=
+                                        product.stock
+                                    }
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+
+                            <button
+                                className="detail-add-cart"
+                                onClick={
+                                    handleAddToCart
+                                }
+                            >
+
+                                🛒 Add to Cart
+
+                            </button>
+
+                        </div>
+
+                    )}
+
+
+                    {product.stock <= 0 && (
+
+                        <button
+                            className="detail-add-cart disabled"
+                            disabled
+                        >
+                            Out of Stock
+                        </button>
+
+                    )}
+
+
+                    {/* BENEFITS */}
+
+                    <div className="detail-benefits">
+
+                        <div>
+
+                            <span>
+                                🚚
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Fast Delivery
+                                </strong>
+
+                                <p>
+                                    Convenient delivery
+                                    to your doorstep
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                🌿
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Fresh Products
+                                </strong>
+
+                                <p>
+                                    Quality checked
+                                    products
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                🔒
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Secure Shopping
+                                </strong>
+
+                                <p>
+                                    Simple and reliable
+                                    checkout
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            {/* ===================================
+    CUSTOMER REVIEWS
+=================================== */}
+
+            <section
+                className="product-reviews-section"
+                data-aos="fade-up"
+            >
+
+                <div className="product-reviews-header">
+
+                    <div>
+
+            <span>
+                CUSTOMER FEEDBACK
+            </span>
+
+                        <h2>
+                            Customer Reviews
+                        </h2>
+
+                        <p>
+                            See what customers think about{" "}
+                            {product.name}.
+                        </p>
+
+                    </div>
+
+
+                    {reviews.length > 0 && (
+
+                        <div className="product-review-summary">
+
+                            <strong>
+                                {averageRating.toFixed(1)}
+                            </strong>
+
+                            <div>
+
+                    <span className="review-summary-stars">
+
+                        {"★".repeat(
+                            roundedRating
+                        )}
+
+                        <span>
+                            {"★".repeat(
+                                5 -
+                                roundedRating
+                            )}
+                        </span>
+
+                    </span>
+
+                                <small>
+                                    Based on{" "}
+                                    {reviews.length}{" "}
+                                    {reviews.length === 1
+                                        ? "review"
+                                        : "reviews"}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    )}
+
+                </div>
+
+
+                <div className="product-reviews-layout">
+
+
+                    {/* REVIEW FORM */}
+
+                    <div className="product-review-form-card">
+
+            <span className="review-form-label">
+                SHARE YOUR EXPERIENCE
+            </span>
+
+                        <h3>
+                            Write a Review
+                        </h3>
+
+
+                        {!user ? (
+
+                            <div className="review-login-message">
+
+                                <p>
+                                    Please login to leave
+                                    a review for this product.
+                                </p>
+
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        navigate("/login")
+                                    }
+                                >
+                                    Login to Review
+                                </button>
+
+                            </div>
+
+                        ) : (
+
+                            <form
+                                onSubmit={
+                                    handleReviewSubmit
+                                }
+                            >
+
+                                <div className="review-rating-field">
+
+                                    <label>
+                                        Your Rating
+                                    </label>
+
+                                    <div className="review-star-buttons">
+
+                                        {[1, 2, 3, 4, 5]
+                                            .map(
+                                                (star) => (
+
+                                                    <button
+                                                        key={star}
+                                                        type="button"
+                                                        className={
+                                                            star <=
+                                                            reviewRating
+                                                                ? "active"
+                                                                : ""
+                                                        }
+                                                        onClick={() => {
+
+                                                            setReviewRating(
+                                                                star
+                                                            );
+
+                                                            setReviewError(
+                                                                ""
+                                                            );
+
+                                                            setReviewSuccess(
+                                                                ""
+                                                            );
+                                                        }}
+                                                        aria-label={
+                                                            `${star} star rating`
+                                                        }
+                                                    >
+                                                        ★
+                                                    </button>
+
+                                                )
+                                            )}
+
+                                    </div>
+
+                                    <small>
+                                        {reviewRating} / 5
+                                    </small>
+
+                                </div>
+
+
+                                <div className="review-comment-field">
+
+                                    <label
+                                        htmlFor="reviewComment"
+                                    >
+                                        Your Review
+                                    </label>
+
+                                    <textarea
+                                        id="reviewComment"
+                                        value={
+                                            reviewComment
+                                        }
+                                        onChange={(event) => {
+
+                                            setReviewComment(
+                                                event.target.value
+                                            );
+
+                                            setReviewError("");
+
+                                            setReviewSuccess("");
+                                        }}
+                                        maxLength={1000}
+                                        rows={5}
+                                        placeholder={
+                                            `Tell us what you think about ${product.name}...`
+                                        }
+                                        required
+                                    />
+
+                                    <small>
+                                        {reviewComment.length}
+                                        /1000
+                                    </small>
+
+                                </div>
+
+
+                                {reviewError && (
+
+                                    <div className="review-message error">
+                                        {reviewError}
+                                    </div>
+
+                                )}
+
+
+                                {reviewSuccess && (
+
+                                    <div className="review-message success">
+                                        {reviewSuccess}
+                                    </div>
+
+                                )}
+
+
+                                <button
+                                    type="submit"
+                                    className="review-submit-button"
+                                    disabled={
+                                        reviewSubmitting
+                                    }
+                                >
+
+                                    {reviewSubmitting
+                                        ? "Submitting..."
+                                        : "Submit Review"}
+
+                                </button>
+
+                            </form>
+
+                        )}
+
+                    </div>
+
+
+                    {/* REVIEW LIST */}
+
+                    <div className="product-review-list">
+
+                        {reviews.length === 0 ? (
+
+                            <div className="reviews-empty">
+
+                                <h3>
+                                    No reviews yet
+                                </h3>
+
+                                <p>
+                                    Be the first customer
+                                    to review this product.
+                                </p>
+
+                            </div>
+
+                        ) : (
+
+                            reviews.map(
+                                (review) => (
+
+                                    <article
+                                        className="product-review-card"
+                                        key={review.id}
+                                    >
+
+                                        <div className="product-review-card-top">
+
+                                            <div className="review-customer-avatar">
+
+                                                {review.customerName
+                                                    ? review.customerName
+                                                        .charAt(0)
+                                                        .toUpperCase()
+                                                    : "C"}
+
+                                            </div>
+
+
+                                            <div className="review-customer-details">
+
+                                                <strong>
+                                                    {review.customerName}
+                                                </strong>
+
+                                                <small>
+                                                    Verified customer
+                                                </small>
+
+                                            </div>
+
+
+                                            <time>
+                                                {formatReviewDate(
+                                                    review.createdAt
+                                                )}
+                                            </time>
+
+                                        </div>
+
+
+                                        <div className="product-review-stars">
+
+                                <span>
+
+                                    {"★".repeat(
+                                        Number(
+                                            review.rating
+                                        )
+                                    )}
+
+                                </span>
+
+                                            <span className="review-empty-stars">
+
+                                    {"★".repeat(
+                                        5 -
+                                        Number(
+                                            review.rating
+                                        )
+                                    )}
+
+                                </span>
+
+                                        </div>
+
+
+                                        <p>
+                                            {review.comment}
+                                        </p>
+
+                                    </article>
+
+                                )
+                            )
+
+                        )}
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            {/* ===================================
+                RELATED PRODUCTS
+            =================================== */}
+
+            {relatedProducts.length > 0 && (
+
+                <section className="related-products">
+
+                    <div className="related-header">
+
+                        <div>
+
+                            <span>
+                                YOU MAY ALSO LIKE
+                            </span>
+
+                            <h2>
+                                Related Products
+                            </h2>
+
+                        </div>
+
+
+                        <Link to="/products">
+                            View All →
+                        </Link>
+
+                    </div>
+
+
+                    <div className="related-grid">
+
+                        {relatedProducts.map(
+                            (item) => (
+
+                                <Link
+                                    to={
+                                        `/products/${item.id}`
+                                    }
+                                    className="related-card"
+                                    key={item.id}
+                                >
+
+                                    <div className="related-image">
+
+                                        <img
+                                            src={
+                                                item.image ||
+                                                "https://placehold.co/400x400?text=No+Image"
+                                            }
+                                            alt={
+                                                item.name
+                                            }
+                                        />
+
+                                    </div>
+
+
+                                    <div className="related-info">
+
+                                        <span>
+                                            {
+                                                item.category
+                                            }
+                                        </span>
+
+                                        <h3>
+                                            {
+                                                item.name
+                                            }
+                                        </h3>
+
+                                        <strong>
+
+                                            Rs.{" "}
+                                            {Number(
+                                                item.price
+                                            ).toLocaleString()}
+
+                                        </strong>
+
+                                    </div>
+
+                                </Link>
+
+                            )
+                        )}
+
+                    </div>
+
+                </section>
+
+            )}
+
+        </div>
+
+    );
 };
 
 export default ProductDetails;
