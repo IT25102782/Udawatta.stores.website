@@ -232,3 +232,122 @@ const Cart = () => {
                             ← Continue Shopping
                         </Link>
 
+                    </div>
+
+
+                    {/* ===============================
+                        ORDER SUMMARY
+                    =============================== */}
+
+                    <aside className="cart-summary-card">
+
+                        <span className="summary-label">
+                            ORDER SUMMARY
+                        </span>
+
+                        <h2>
+                            Your Total
+                        </h2>
+
+
+                        <div className="summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong>
+                                Rs. {formatPrice(getCartTotal())}
+                            </strong>
+
+                        </div>
+
+
+                        <div className="summary-row">
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <strong className="free-delivery">
+                                FREE
+                            </strong>
+
+                        </div>
+
+
+                        <div className="summary-divider">
+                        </div>
+
+
+                        <div className="summary-total">
+
+                            <div>
+                                <span>
+                                    Total
+                                </span>
+
+                                <small>
+                                    Including all items
+                                </small>
+                            </div>
+
+                            <strong>
+                                Rs. {formatPrice(getCartTotal())}
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            className="checkout-button"
+                            onClick={() =>
+                                navigate("/checkout")
+                            }
+                        >
+                            Proceed to Checkout
+                            <span>→</span>
+                        </button>
+
+
+                        <div className="cart-secure-note">
+
+                            <span>
+                                🔒
+                            </span>
+
+                            <p>
+                                Secure and convenient
+                                checkout
+                            </p>
+
+                        </div>
+
+
+                        <div className="cart-summary-benefits">
+
+                            <p>
+                                ✓ Fresh quality products
+                            </p>
+
+                            <p>
+                                ✓ Fast delivery
+                            </p>
+
+                            <p>
+                                ✓ Easy order tracking
+                            </p>
+
+                        </div>
+
+                    </aside>
+
+                </section>
+
+            )}
+
+        </div>
+    );
+};
+
+export default Cart;
