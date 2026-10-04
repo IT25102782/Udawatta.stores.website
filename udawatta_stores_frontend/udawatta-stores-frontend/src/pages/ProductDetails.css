@@ -1,0 +1,460 @@
+/* =====================================
+   PRODUCT DETAILS PAGE
+===================================== */
+
+.product-details-page {
+    min-height: 100vh;
+
+    background: #f8faf7;
+
+    padding-bottom: 80px;
+}
+
+
+/* =====================================
+   BREADCRUMB
+===================================== */
+
+.product-breadcrumb {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding: 30px 30px 10px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+.product-breadcrumb a {
+    color: #52735b;
+
+    text-decoration: none;
+}
+
+.product-breadcrumb a:hover {
+    color: #2e7d32;
+}
+
+
+/* =====================================
+   MAIN PRODUCT AREA
+===================================== */
+
+.product-detail-main {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding: 35px 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 65px;
+
+    align-items: start;
+}
+
+
+/* =====================================
+   PRODUCT IMAGE
+===================================== */
+
+.product-detail-image {
+    width: 100%;
+
+    height: 520px;
+
+    background: white;
+
+    border: 1px solid #e8eee5;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    box-shadow:
+            0 15px 40px
+            rgba(31, 77, 35, 0.08);
+}
+
+.product-detail-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+            transform 0.7s ease;
+}
+
+.product-detail-image:hover img {
+    transform: scale(1.05);
+}
+
+
+/* Image note */
+
+.image-quality-note {
+    margin-top: 18px;
+
+    padding: 16px 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: #eef7eb;
+
+    border-radius: 12px;
+
+    color: #516452;
+}
+
+.image-quality-note span {
+    font-size: 26px;
+}
+
+.image-quality-note p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =====================================
+   PRODUCT INFO
+===================================== */
+
+.product-detail-info {
+    padding-top: 10px;
+}
+
+.detail-top-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 15px;
+}
+
+.detail-category {
+    color: #2e7d32;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+.detail-stock {
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+.detail-stock.available {
+    background: #dff3df;
+
+    color: #217129;
+}
+
+.detail-stock.unavailable {
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* Name */
+
+.product-detail-info h1 {
+    margin: 0 0 15px;
+
+    color: #202020;
+
+    font-size: 44px;
+
+    line-height: 1.15;
+
+    letter-spacing: -1px;
+}
+
+
+/* Rating */
+
+.detail-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.detail-rating span {
+    color: #f5b301;
+
+    letter-spacing: 2px;
+}
+
+.detail-rating small {
+    color: #888;
+}
+
+
+/* Price */
+
+.detail-price {
+    color: #207434;
+
+    font-size: 34px;
+
+    font-weight: 800;
+}
+
+.detail-divider {
+    height: 1px;
+
+    margin: 28px 0;
+
+    background: #e3e9e1;
+}
+
+
+/* Description */
+
+.detail-description h3 {
+    margin: 0 0 12px;
+
+    font-size: 17px;
+}
+
+.detail-description p {
+    margin: 0;
+
+    color: #6d6d6d;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+
+/* Stock info */
+
+.detail-stock-info {
+    margin: 24px 0;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    background: #f1f5ef;
+
+    border-radius: 10px;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+.detail-stock-info strong {
+    color: #245b31;
+}
+
+
+/* =====================================
+   PURCHASE
+===================================== */
+
+.detail-purchase {
+    display: grid;
+
+    grid-template-columns:
+        145px 1fr;
+
+    gap: 13px;
+
+    margin-bottom: 28px;
+}
+
+
+/* Quantity */
+
+.detail-quantity {
+    height: 52px;
+
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr 45px;
+
+    border:
+            1px solid #dce5d9;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+.detail-quantity button {
+    border: none;
+
+    background: #f4f7f2;
+
+    color: #21532d;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.detail-quantity button:hover:not(:disabled) {
+    background: #e2f0de;
+}
+
+.detail-quantity button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+.detail-quantity span {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 800;
+
+    border-left:
+            1px solid #e4e9e2;
+
+    border-right:
+            1px solid #e4e9e2;
+}
+
+
+/* Add cart */
+
+.detail-add-cart {
+    height: 52px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+            all 0.3s ease;
+}
+
+.detail-add-cart:hover:not(.disabled) {
+    background: #1b5e20;
+
+    transform:
+            translateY(-2px);
+
+    box-shadow:
+            0 10px 22px
+            rgba(46, 125, 50, 0.25);
+}
+
+.detail-add-cart.disabled {
+    width: 100%;
+
+    background: #cccccc;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================
+   BENEFITS
+===================================== */
+
+.detail-benefits {
+    padding-top: 20px;
+
+    border-top:
+            1px solid #e4e9e2;
+}
+
+.detail-benefits > div {
+    padding: 11px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.detail-benefits > div > span {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #edf6ea;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+}
+
+.detail-benefits strong {
+    display: block;
+
+    font-size: 13px;
+}
+
+.detail-benefits p {
+    margin: 3px 0 0;
+
+    color: #888;
+
+    font-size: 11px;
+}
+
+
