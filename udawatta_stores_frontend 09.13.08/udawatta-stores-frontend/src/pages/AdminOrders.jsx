@@ -115,6 +115,50 @@ const AdminOrders = () => {
 
 
     // ==========================================
+    // DELETE ORDER
+    // ==========================================
+
+    const handleDeleteOrder = async (id) => {
+
+        const confirmed =
+            window.confirm(
+                "Are you sure you want to delete this order?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            await axios.delete(
+                `http://localhost:8080/api/orders/${id}`
+            );
+
+
+            await fetchOrders();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error deleting order:",
+                error
+            );
+
+
+            alert(
+                "Failed to delete the order."
+            );
+
+        }
+
+    };
+
+
+    // ==========================================
     // HELPERS
     // ==========================================
 
@@ -585,6 +629,17 @@ const AdminOrders = () => {
                                                 </select>
 
 
+                                                <button
+                                                    type="button"
+                                                    className="admin-delete-order"
+                                                    onClick={() =>
+                                                        handleDeleteOrder(
+                                                            order.id
+                                                        )
+                                                    }
+                                                >
+                                                    Delete
+                                                </button>
 
                                             </div>
 
