@@ -781,3 +781,208 @@
 }
 
 
+/* =====================================
+   REVIEW FORM
+===================================== */
+
+.product-review-form-card {
+    padding: 28px;
+
+    border:
+            1px solid #e4ebe2;
+
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+            0 12px 35px
+            rgba(29, 74, 35, 0.06);
+}
+
+
+.review-form-label {
+    color: #2e7d32;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+
+.product-review-form-card h3 {
+    margin: 7px 0 22px;
+
+    color: #263229;
+
+    font-size: 24px;
+}
+
+
+.review-rating-field {
+    margin-bottom: 22px;
+}
+
+
+.review-rating-field label,
+.review-comment-field label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #404840;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.review-star-buttons {
+    display: flex;
+
+    gap: 4px;
+}
+
+
+.review-star-buttons button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #dce2da;
+
+    font-size: 31px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+}
+
+
+.review-star-buttons button.active {
+    color: #f5b301;
+}
+
+
+.review-star-buttons button:hover {
+    transform: scale(1.12);
+}
+
+
+.review-rating-field > small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+
+.review-comment-field {
+    position: relative;
+}
+
+
+.review-comment-field textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    resize: vertical;
+
+    border:
+            1px solid #dce5d9;
+
+    border-radius: 10px;
+
+    background: #fafcf9;
+
+    color: #333;
+
+    outline: none;
+
+    font: inherit;
+
+    line-height: 1.6;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+.review-comment-field textarea:focus {
+    border-color: #4c9854;
+
+    box-shadow:
+            0 0 0 3px
+            rgba(76, 152, 84, 0.10);
+}
+
+
+.review-comment-field > small {
+    display: block;
+
+    margin-top: 5px;
+
+    text-align: right;
+
+    color: #999;
+
+    font-size: 9px;
+}
+
+
+.review-submit-button {
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 17px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+
+.review-submit-button:hover:not(:disabled) {
+    background: #1f6425;
+
+    transform:
+            translateY(-1px);
+}
+
+
+.review-submit-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
