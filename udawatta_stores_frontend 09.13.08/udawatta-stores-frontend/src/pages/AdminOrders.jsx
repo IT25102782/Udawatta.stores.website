@@ -73,6 +73,48 @@ const AdminOrders = () => {
 
 
     // ==========================================
+    // UPDATE STATUS
+    // ==========================================
+
+    const handleStatusChange = async (
+        id,
+        newStatus
+    ) => {
+
+        try {
+
+            await axios.put(
+                `http://localhost:8080/api/orders/${id}/status`,
+                newStatus,
+                {
+                    headers: {
+                        "Content-Type": "text/plain"
+                    }
+                }
+            );
+
+
+            await fetchOrders();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error updating status:",
+                error
+            );
+
+
+            alert(
+                "Failed to update order status."
+            );
+
+        }
+
+    };
+
+
+    // ==========================================
     // HELPERS
     // ==========================================
 
@@ -513,6 +555,35 @@ const AdminOrders = () => {
                                         <td>
 
                                             <div className="admin-order-actions">
+
+                                                <select
+                                                    value={
+                                                        order.status ||
+                                                        "PENDING"
+                                                    }
+                                                    onChange={(event) =>
+                                                        handleStatusChange(
+                                                            order.id,
+                                                            event.target.value
+                                                        )
+                                                    }
+                                                    className="admin-status-select"
+                                                >
+
+                                                    <option value="PENDING">
+                                                        PENDING
+                                                    </option>
+
+                                                    <option value="SHIPPED">
+                                                        SHIPPED
+                                                    </option>
+
+                                                    <option value="DELIVERED">
+                                                        DELIVERED
+                                                    </option>
+
+                                                </select>
+
 
 
                                             </div>
