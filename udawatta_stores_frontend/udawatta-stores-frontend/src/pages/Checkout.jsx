@@ -220,3 +220,229 @@ const Checkout = () => {
 
             <section className="checkout-page-header">
 
+                <span>
+                    FINAL STEP
+                </span>
+
+                <h1>
+                    Checkout
+                </h1>
+
+                <p>
+                    Enter your delivery information,
+                    review your order and place your order.
+                </p>
+
+            </section>
+
+
+            <section className="checkout-layout">
+
+                {/* ==============================
+                    CHECKOUT FORM
+                ============================== */}
+
+                <div className="checkout-form-card">
+
+                    <div className="checkout-card-heading">
+
+                        <span>
+                            DELIVERY DETAILS
+                        </span>
+
+                        <h2>
+                            Where should we deliver?
+                        </h2>
+
+                        <p>
+                            Please enter accurate information
+                            so we can deliver your order.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        onSubmit={handleSubmit}
+                        className="modern-checkout-form"
+                    >
+
+                        {/* FULL NAME */}
+
+                        <div className="checkout-form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="customerName"
+                                value={
+                                    customerInfo.customerName
+                                }
+                                onChange={
+                                    handleInputChange
+                                }
+                                required
+                                placeholder="Enter your full name"
+                            />
+
+                        </div>
+
+
+                        {/* ADDRESS */}
+
+                        <div className="checkout-form-group">
+
+                            <label>
+                                Delivery Address
+                            </label>
+
+                            <textarea
+                                name="address"
+                                value={
+                                    customerInfo.address
+                                }
+                                onChange={
+                                    handleInputChange
+                                }
+                                required
+                                placeholder="House number, street, city..."
+                                rows="4"
+                            />
+
+                        </div>
+
+
+                        {/* POSTAL CODE + PHONE */}
+
+                        <div className="checkout-input-row">
+
+                            <div className="checkout-form-group">
+
+                                <label>
+                                    Postal Code
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="postalCode"
+                                    value={
+                                        customerInfo.postalCode
+                                    }
+                                    onChange={
+                                        handleInputChange
+                                    }
+                                    required
+                                    placeholder="Postal code"
+                                />
+
+                            </div>
+
+
+                            <div className="checkout-form-group">
+
+                                <label>
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={
+                                        customerInfo.phone
+                                    }
+                                    onChange={
+                                        handleInputChange
+                                    }
+                                    required
+                                    placeholder="077 123 4567"
+                                />
+
+                            </div>
+
+                        </div>
+
+
+                        {/* ==============================
+                            PAYMENT METHOD
+                        ============================== */}
+
+                        <div className="checkout-payment-section">
+
+                            <div className="checkout-payment-heading">
+
+                                <span>
+                                    PAYMENT
+                                </span>
+
+                                <h3>
+                                    Choose payment method
+                                </h3>
+
+                            </div>
+
+
+                            {/* COD - ACTIVE */}
+
+                            <label
+                                className="
+                                    payment-method-card
+                                    payment-method-active
+                                "
+                            >
+
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="COD"
+                                    checked
+                                    readOnly
+                                />
+
+                                <div className="payment-method-info">
+
+                                    <strong>
+                                        Cash on Delivery
+                                    </strong>
+
+                                    <span>
+                                        Pay when your groceries
+                                        are delivered.
+                                    </span>
+
+                                </div>
+
+                            </label>
+
+
+                            {/* ONLINE PAYMENT - DISABLED */}
+
+                            <label
+                                className="
+                                    payment-method-card
+                                    payment-method-disabled
+                                "
+                            >
+
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="ONLINE"
+                                    disabled
+                                />
+
+                                <div className="payment-method-info">
+
+                                    <strong>
+                                        Pay Online with PayHere
+                                    </strong>
+
+                                    <span>
+                                        Available after website deployment.
+                                    </span>
+
+                                </div>
+
+
