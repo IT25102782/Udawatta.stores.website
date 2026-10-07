@@ -238,7 +238,546 @@ const AdminProducts = () => {
             .toLocaleString();
 
 
-    return null;
+    return (
+
+        <div className="ap-page">
+
+            <div className="ap-top">
+
+                <div>
+
+                    <span>
+                        ADMIN PANEL
+                    </span>
+
+                    <h1>
+                        Manage Products
+                    </h1>
+
+                    <p>
+                        Update product details,
+                        stock levels and store inventory.
+                    </p>
+
+                </div>
+
+
+                <div className="ap-top-actions">
+
+                    <Link
+                        to="/admin/dashboard"
+                        className="ap-secondary-button"
+                    >
+                        ← Dashboard
+                    </Link>
+
+                    <Link
+                        to="/admin/add-product"
+                        className="ap-primary-button"
+                    >
+                        + Add Product
+                    </Link>
+
+                </div>
+
+            </div>
+
+
+            {/* STATS */}
+
+            <div className="ap-stats">
+
+                <div>
+                    <span>📦</span>
+
+                    <section>
+                        <small>
+                            Total Products
+                        </small>
+
+                        <strong>
+                            {products.length}
+                        </strong>
+                    </section>
+                </div>
+
+
+                <div>
+                    <span>🗂️</span>
+
+                    <section>
+                        <small>
+                            Categories
+                        </small>
+
+                        <strong>
+                            {categoryCount}
+                        </strong>
+                    </section>
+                </div>
+
+
+                <div>
+                    <span>⚠️</span>
+
+                    <section>
+                        <small>
+                            Low Stock
+                        </small>
+
+                        <strong>
+                            {lowStockCount}
+                        </strong>
+                    </section>
+                </div>
+
+
+                <div>
+                    <span>❌</span>
+
+                    <section>
+                        <small>
+                            Out of Stock
+                        </small>
+
+                        <strong>
+                            {outOfStockCount}
+                        </strong>
+                    </section>
+                </div>
+
+            </div>
+
+
+            {/* PRODUCT PANEL */}
+
+            <section className="ap-panel">
+
+                <div className="ap-panel-header">
+
+                    <div>
+
+                        <span>
+                            PRODUCT CATALOG
+                        </span>
+
+                        <h2>
+                            All Products
+                        </h2>
+
+                    </div>
+
+
+                    <div className="ap-search">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={searchTerm}
+                            onChange={(event) =>
+                                setSearchTerm(
+                                    event.target.value
+                                )
+                            }
+                        />
+
+                    </div>
+
+                </div>
+
+
+                {error && (
+                    <div className="ap-error">
+                        {error}
+                    </div>
+                )}
+
+
+                {loading ? (
+
+                    <div className="ap-loading">
+
+                        <div className="ap-spinner">
+                        </div>
+
+                        Loading products...
+
+                    </div>
+
+                ) : (
+
+                    <div className="ap-table-wrapper">
+
+                        <table className="ap-table">
+
+                            <thead>
+
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                            {filteredProducts.map(
+                                (product) => {
+
+                                    const stock =
+                                        Number(
+                                            product.stock
+                                        );
+
+                                    return (
+
+                                        <tr key={product.id}>
+
+                                            <td>
+
+                                                <div className="ap-product-cell">
+
+                                                    <img
+                                                        src={
+                                                            product.image ||
+                                                            "https://placehold.co/100x100?text=No+Image"
+                                                        }
+                                                        alt={
+                                                            product.name
+                                                        }
+                                                        onError={(event) => {
+                                                            event.currentTarget.src =
+                                                                "https://placehold.co/100x100?text=No+Image";
+                                                        }}
+                                                    />
+
+                                                    <div>
+
+                                                        <strong>
+                                                            {product.name}
+                                                        </strong>
+
+                                                        <small>
+                                                            ID #{product.id}
+                                                        </small>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+
+
+                                            <td>
+                                                {product.category}
+                                            </td>
+
+
+                                            <td>
+
+                                                <strong className="ap-price">
+
+                                                    Rs.{" "}
+                                                    {formatPrice(
+                                                        product.price
+                                                    )}
+
+                                                </strong>
+
+                                            </td>
+
+
+                                            <td>
+                                                {stock}
+                                            </td>
+
+
+                                            <td>
+
+                                                <span
+                                                    className={
+                                                        stock <= 0
+                                                            ? "ap-stock ap-out"
+                                                            : stock < 5
+                                                                ? "ap-stock ap-low"
+                                                                : "ap-stock ap-good"
+                                                    }
+                                                >
+
+                                                    {stock <= 0
+                                                        ? "Out of Stock"
+                                                        : stock < 5
+                                                            ? "Low Stock"
+                                                            : "In Stock"}
+
+                                                </span>
+
+                                            </td>
+
+
+                                            <td>
+
+                                                <div className="ap-actions">
+
+                                                    <button
+                                                        className="ap-edit"
+                                                        onClick={() =>
+                                                            handleEditClick(
+                                                                product
+                                                            )
+                                                        }
+                                                    >
+                                                        Edit
+                                                    </button>
+
+                                                    <button
+                                                        className="ap-delete"
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                product.id
+                                                            )
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </button>
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
+                                    );
+                                }
+                            )}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                )}
+
+            </section>
+
+
+            {/* EDIT MODAL */}
+
+            {editingProduct && (
+
+                <div
+                    className="ap-modal-overlay"
+                    onMouseDown={(event) => {
+
+                        if (
+                            event.target ===
+                            event.currentTarget
+                        ) {
+                            setEditingProduct(null);
+                        }
+
+                    }}
+                >
+
+                    <form
+                        className="ap-edit-modal"
+                        onSubmit={
+                            handleUpdateSubmit
+                        }
+                    >
+
+                        <div className="ap-modal-header">
+
+                            <div>
+
+                                <span>
+                                    EDIT PRODUCT
+                                </span>
+
+                                <h2>
+                                    {editingProduct.name}
+                                </h2>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setEditingProduct(null)
+                                }
+                            >
+                                ✕
+                            </button>
+
+                        </div>
+
+
+                        <div className="ap-form-grid">
+
+                            <label>
+                                Product Name
+
+                                <input
+                                    type="text"
+                                    value={
+                                        editingProduct.name
+                                    }
+                                    onChange={(event) =>
+                                        updateEditField(
+                                            "name",
+                                            event.target.value
+                                        )
+                                    }
+                                    required
+                                />
+                            </label>
+
+
+                            <label>
+                                Category
+
+                                <input
+                                    type="text"
+                                    value={
+                                        editingProduct.category
+                                    }
+                                    onChange={(event) =>
+                                        updateEditField(
+                                            "category",
+                                            event.target.value
+                                        )
+                                    }
+                                    required
+                                />
+                            </label>
+
+
+                            <label>
+                                Price (Rs.)
+
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    value={
+                                        editingProduct.price
+                                    }
+                                    onChange={(event) =>
+                                        updateEditField(
+                                            "price",
+                                            event.target.value
+                                        )
+                                    }
+                                    required
+                                />
+                            </label>
+
+
+                            <label>
+                                Stock
+
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value={
+                                        editingProduct.stock
+                                    }
+                                    onChange={(event) =>
+                                        updateEditField(
+                                            "stock",
+                                            event.target.value
+                                        )
+                                    }
+                                    required
+                                />
+                            </label>
+
+                        </div>
+
+
+                        <label className="ap-full-field">
+
+                            Image URL
+
+                            <input
+                                type="text"
+                                value={
+                                    editingProduct.image ||
+                                    ""
+                                }
+                                onChange={(event) =>
+                                    updateEditField(
+                                        "image",
+                                        event.target.value
+                                    )
+                                }
+                            />
+
+                        </label>
+
+
+                        <label className="ap-full-field">
+
+                            Description
+
+                            <textarea
+                                rows="4"
+                                value={
+                                    editingProduct.description ||
+                                    ""
+                                }
+                                onChange={(event) =>
+                                    updateEditField(
+                                        "description",
+                                        event.target.value
+                                    )
+                                }
+                            />
+
+                        </label>
+
+
+                        <div className="ap-modal-buttons">
+
+                            <button
+                                type="button"
+                                className="ap-cancel"
+                                onClick={() =>
+                                    setEditingProduct(null)
+                                }
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                className="ap-save"
+                                disabled={saving}
+                            >
+                                {saving
+                                    ? "Saving..."
+                                    : "Save Changes"}
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            )}
+
+        </div>
+
+    );
 };
 
 export default AdminProducts;
