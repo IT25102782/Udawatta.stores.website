@@ -446,3 +446,229 @@ const Checkout = () => {
                                 </div>
 
 
+                                <div className="payhere-badge">
+                                    Coming Soon
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                        {/* DELIVERY NOTE */}
+
+                        <div className="checkout-delivery-note">
+
+                            <div>
+
+                                <strong>
+                                    Delivery Information
+                                </strong>
+
+                                <p>
+                                    Your order will be delivered
+                                    to the address provided above.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        {/* PLACE ORDER BUTTON */}
+
+                        <button
+                            type="submit"
+                            className="modern-place-order-button"
+                            disabled={submitting}
+                        >
+
+                            <span>
+
+                                {submitting
+                                    ? "Placing Order..."
+                                    : "Place Order"}
+
+                            </span>
+
+
+                            {!submitting && (
+
+                                <span>
+                                    →
+                                </span>
+
+                            )}
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                {/* ==============================
+                    ORDER SUMMARY
+                ============================== */}
+
+                <aside className="checkout-order-summary">
+
+                    <span className="checkout-summary-label">
+                        YOUR ORDER
+                    </span>
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+                    {/* PRODUCTS */}
+
+                    <div className="checkout-products">
+
+                        {cartItems.map((item) => (
+
+                            <div
+                                className="checkout-product"
+                                key={item.id}
+                            >
+
+                                <div className="checkout-product-image">
+
+                                    <img
+                                        src={
+                                            item.image ||
+                                            "https://placehold.co/200x200?text=No+Image"
+                                        }
+                                        alt={item.name}
+                                    />
+
+                                    <span>
+                                        {item.quantity}
+                                    </span>
+
+                                </div>
+
+
+                                <div className="checkout-product-details">
+
+                                    <strong>
+                                        {item.name}
+                                    </strong>
+
+                                    <small>
+                                        Qty: {item.quantity}
+                                    </small>
+
+                                </div>
+
+
+                                <div className="checkout-product-price">
+
+                                    Rs.{" "}
+
+                                    {formatPrice(
+                                        Number(item.price) *
+                                        Number(item.quantity)
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                        ))}
+
+                    </div>
+
+
+                    <div className="checkout-summary-divider" />
+
+
+                    {/* SUBTOTAL */}
+
+                    <div className="checkout-total-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong>
+                            Rs. {formatPrice(getCartTotal())}
+                        </strong>
+
+                    </div>
+
+
+                    {/* DELIVERY */}
+
+                    <div className="checkout-total-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong className="checkout-free">
+                            FREE
+                        </strong>
+
+                    </div>
+
+
+                    <div className="checkout-summary-divider" />
+
+
+                    {/* GRAND TOTAL */}
+
+                    <div className="checkout-grand-total">
+
+                        <div>
+
+                            <span>
+                                Total
+                            </span>
+
+                            <small>
+                                Amount to pay
+                            </small>
+
+                        </div>
+
+
+                        <strong>
+                            Rs. {formatPrice(getCartTotal())}
+                        </strong>
+
+                    </div>
+
+
+                    {/* PAYMENT INFO */}
+
+                    <div className="checkout-security">
+
+                        <p>
+                            Cash on Delivery is currently available.
+                            Online payments will be enabled after
+                            deployment.
+                        </p>
+
+                    </div>
+
+
+                    <Link
+                        to="/cart"
+                        className="checkout-back-cart"
+                    >
+                        ← Back to Cart
+                    </Link>
+
+                </aside>
+
+            </section>
+
+        </div>
+
+    );
+};
+
+
+export default Checkout;
