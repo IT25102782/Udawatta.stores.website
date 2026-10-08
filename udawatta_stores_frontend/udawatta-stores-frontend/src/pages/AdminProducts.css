@@ -153,3 +153,236 @@
 }
 
 
+/* PANEL */
+
+.ap-panel {
+    max-width: 1450px;
+
+    margin: auto;
+
+    padding: 24px;
+
+    background: white;
+
+    border:
+            1px solid #e5ebe3;
+
+    border-radius: 16px;
+
+    box-shadow:
+            0 8px 27px
+            rgba(0, 0, 0, 0.04);
+}
+
+.ap-panel-header {
+    margin-bottom: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.ap-panel-header h2 {
+    margin: 4px 0 0;
+
+    font-size: 24px;
+}
+
+
+/* SEARCH */
+
+.ap-search {
+    width: 280px;
+
+    position: relative;
+}
+
+.ap-search span {
+    position: absolute;
+
+    left: 13px;
+
+    top: 50%;
+
+    transform:
+            translateY(-50%);
+
+    color: #999;
+}
+
+.ap-search input {
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+            0 14px 0 36px;
+
+    border:
+            1px solid #dce5d9;
+
+    border-radius: 8px;
+
+    outline: none;
+}
+
+.ap-search input:focus {
+    border-color: #2e7d32;
+}
+
+
+/* TABLE */
+
+.ap-table-wrapper {
+    overflow-x: auto;
+
+    border:
+            1px solid #e8ece6;
+
+    border-radius: 11px;
+}
+
+.ap-table {
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+}
+
+.ap-table th {
+    padding: 13px 14px;
+
+    background: #163e28;
+
+    color: white;
+
+    text-align: left;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.ap-table td {
+    padding: 14px;
+
+    border-bottom:
+            1px solid #edf0ec;
+
+    color: #555;
+
+    font-size: 11px;
+}
+
+.ap-product-cell {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.ap-product-cell img {
+    width: 50px;
+    height: 50px;
+
+    object-fit: cover;
+
+    background: #f3f6f1;
+
+    border-radius: 8px;
+}
+
+.ap-product-cell > div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.ap-product-cell strong {
+    color: #333;
+
+    font-size: 11px;
+}
+
+.ap-product-cell small {
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 8px;
+}
+
+.ap-price {
+    color: #207434;
+}
+
+
+/* STOCK */
+
+.ap-stock {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+.ap-good {
+    background: #dff2df;
+    color: #22742d;
+}
+
+.ap-low {
+    background: #fff0c6;
+    color: #916500;
+}
+
+.ap-out {
+    background: #fee2e2;
+    color: #b12e2e;
+}
+
+
+/* ACTIONS */
+
+.ap-actions {
+    display: flex;
+
+    gap: 7px;
+}
+
+.ap-actions button {
+    padding: 7px 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.ap-edit {
+    background: #e69621;
+}
+
+.ap-delete {
+    background: #e94b4b;
+}
+
+
