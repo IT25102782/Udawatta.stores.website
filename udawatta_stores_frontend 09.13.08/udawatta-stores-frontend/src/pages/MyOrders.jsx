@@ -186,7 +186,240 @@ const MyOrders = () => {
     };
 
 
-    return null;
+    // =========================================================
+    // LOADING
+    // =========================================================
+
+    if (loading) {
+
+        return (
+
+            <div className="my-orders-page">
+
+                <div className="orders-loading">
+
+                    <div className="orders-spinner">
+                    </div>
+
+                    <p>
+                        Loading your orders...
+                    </p>
+
+                </div>
+
+            </div>
+        );
+    }
+
+
+    // =========================================================
+    // PAGE
+    // =========================================================
+
+    return (
+
+        <div className="my-orders-page">
+
+
+            {/* PAGE HEADER */}
+
+            <section className="my-orders-header">
+
+                <span>
+                    ORDER HISTORY
+                </span>
+
+                <h1>
+                    My Orders
+                </h1>
+
+                <p>
+                    Track your previous orders
+                    and view delivery information.
+                </p>
+
+            </section>
+
+
+            <section className="my-orders-content">
+
+
+                {/* ERROR */}
+
+                {error && (
+
+                    <div className="orders-error">
+
+                        {error}
+
+                    </div>
+                )}
+
+
+                {/* EMPTY ORDERS */}
+
+                {!error &&
+                orders.length === 0 ? (
+
+                    <div className="my-orders-empty">
+
+                        <div className="empty-orders-icon">
+                            📦
+                        </div>
+
+                        <h2>
+                            No orders yet
+                        </h2>
+
+                        <p>
+                            You haven't placed any
+                            orders with Udawatta Stores yet.
+                        </p>
+
+                        <Link
+                            to="/products"
+                            className="orders-shop-button"
+                        >
+                            Start Shopping
+                        </Link>
+
+                    </div>
+
+                ) : (
+
+                    !error && (
+
+                        <>
+
+                            {/* TOP ROW */}
+
+                            <div className="orders-top-row">
+
+                                <div>
+
+                                    <span>
+                                        YOUR PURCHASES
+                                    </span>
+
+                                    <h2>
+                                        Recent Orders
+                                    </h2>
+
+                                </div>
+
+
+                                <strong>
+
+                                    {orders.length}{" "}
+
+                                    {orders.length === 1
+                                        ? "Order"
+                                        : "Orders"}
+
+                                </strong>
+
+                            </div>
+
+
+                            {/* ORDERS */}
+
+                            <div className="modern-orders-list">
+
+                                {orders.map(
+                                    (order) => (
+
+                                        <article
+                                            className="modern-order-card"
+                                            key={order.id}
+                                        >
+
+
+                                            {/* HEADER */}
+
+                                            <div className="modern-order-header">
+
+                                                <div>
+
+                                                    <span className="order-number-label">
+                                                        ORDER NUMBER
+                                                    </span>
+
+                                                    <h3>
+                                                        #{order.id}
+                                                    </h3>
+
+                                                </div>
+
+
+                                                <span
+                                                    className={
+                                                        `modern-order-status ${getStatusClass(
+                                                            order.status
+                                                        )}`
+                                                    }
+                                                >
+                                                    {
+                                                        order.status ||
+                                                        "PENDING"
+                                                    }
+                                                </span>
+
+                                            </div>
+
+
+
+
+                                            {/* FOOTER */}
+
+                                            <div className="modern-order-footer">
+
+                                                <div>
+
+                                                    <span>
+                                                        Order Total
+                                                    </span>
+
+                                                    <strong>
+
+                                                        Rs.{" "}
+
+                                                        {
+                                                            formatPrice(
+                                                                order.totalAmount
+                                                            )
+                                                        }
+
+                                                    </strong>
+
+                                                </div>
+
+
+                                                <Link
+                                                    to="/products"
+                                                    className="order-again-link"
+                                                >
+                                                    Shop Again →
+                                                </Link>
+
+                                            </div>
+
+                                        </article>
+                                    )
+                                )}
+
+                            </div>
+
+                        </>
+
+                    )
+
+                )}
+
+            </section>
+
+        </div>
+    );
 };
+
 
 export default MyOrders;
