@@ -1,0 +1,675 @@
+/* =========================================
+   LOGIN PAGE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+.login-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 45px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background-image:
+            url("../assets/login_bg.PNG");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================
+   BACKGROUND OVERLAY
+========================================= */
+
+.login-background-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+            linear-gradient(
+                    120deg,
+                    rgba(4, 45, 19, 0.22),
+                    rgba(15, 90, 35, 0.08),
+                    rgba(3, 35, 14, 0.18)
+            );
+
+    backdrop-filter: blur(1px);
+}
+
+
+/* =========================================
+   DECORATIVE SHAPES
+========================================= */
+
+.login-shape {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+            );
+
+    filter: blur(1px);
+}
+
+
+.login-shape-one {
+    width: 180px;
+    height: 180px;
+
+    top: 10%;
+    left: 8%;
+
+    animation:
+            loginShapeFloatOne
+            9s ease-in-out infinite;
+}
+
+
+.login-shape-two {
+    width: 100px;
+    height: 100px;
+
+    bottom: 15%;
+    right: 10%;
+
+    animation:
+            loginShapeFloatTwo
+            7s ease-in-out infinite;
+}
+
+
+.login-shape-three {
+    width: 60px;
+    height: 60px;
+
+    top: 18%;
+    right: 25%;
+
+    animation:
+            loginShapeFloatOne
+            6s ease-in-out infinite;
+}
+
+
+
+@keyframes loginShapeFloatOne {
+
+    0%,
+    100% {
+        transform:
+                translateY(0)
+                translateX(0);
+    }
+
+    50% {
+        transform:
+                translateY(-20px)
+                translateX(12px);
+    }
+
+}
+
+
+@keyframes loginShapeFloatTwo {
+
+    0%,
+    100% {
+        transform:
+                translateY(0)
+                translateX(0);
+    }
+
+    50% {
+        transform:
+                translateY(18px)
+                translateX(-12px);
+    }
+
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.login-container {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    max-width: 1080px;
+
+    min-height: 570px;
+
+    display: grid;
+
+    grid-template-columns:
+        0.95fr 1.05fr;
+
+    overflow: hidden;
+
+    background:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.97
+            );
+
+    border:
+            1px solid
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+            );
+
+    border-radius: 28px;
+
+    box-shadow:
+            0 35px 90px
+            rgba(
+                    0,
+                    35,
+                    10,
+                    0.25
+            );
+
+    animation:
+            loginContainerEntrance
+            0.8s
+            cubic-bezier(
+                    0.16,
+                    1,
+                    0.3,
+                    1
+            );
+}
+
+
+@keyframes loginContainerEntrance {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(30px)
+                scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+
+}
+
+
+/* =========================================
+   LEFT BRAND SECTION
+========================================= */
+
+.login-brand {
+    position: relative;
+
+    padding: 55px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    #174d27,
+                    #2e7d32 58%,
+                    #388e3c
+            );
+
+    color: white;
+}
+
+
+/* Decorative glow */
+
+.login-brand::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    top: -170px;
+    right: -150px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.07
+            );
+}
+
+
+.login-brand::after {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    bottom: -150px;
+    left: -100px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+            );
+}
+
+
+/* Content */
+
+.login-brand-inner {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: left;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.login-logo-wrapper {
+    width: 100%;
+
+    margin-bottom: 45px;
+
+    padding: 18px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 22px;
+
+    box-shadow:
+            0 12px 35px
+            rgba(
+                    0,
+                    0,
+                    0,
+                    0.13
+            );
+
+    animation:
+            loginLogoFloat
+            4s ease-in-out infinite;
+}
+
+
+.login-logo {
+    width: 100%;
+
+    max-width: 330px;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+@keyframes loginLogoFloat {
+
+    0%,
+    100% {
+        transform:
+                translateY(0);
+    }
+
+    50% {
+        transform:
+                translateY(-7px);
+    }
+
+}
+
+
+/* =========================================
+   BRAND TEXT
+========================================= */
+
+.login-brand-label {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #c5efb6;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.login-brand-copy h1 {
+    margin:
+            0 0 15px;
+
+    font-size: 36px;
+
+    line-height: 1.12;
+
+    letter-spacing: -1px;
+}
+
+
+.login-brand-copy p {
+    max-width: 360px;
+
+    margin: 0;
+
+    color:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.78
+            );
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   FEATURE POINTS
+========================================= */
+
+.login-brand-features {
+    margin-top: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.login-brand-features > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.88
+            );
+
+    font-size: 12px;
+}
+
+
+.feature-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    background: #b8ec95;
+
+    border-radius: 50%;
+
+    box-shadow:
+            0 0 0 4px
+            rgba(
+                    184,
+                    236,
+                    149,
+                    0.14
+            );
+}
+
+
+/* =========================================
+   RIGHT FORM SECTION
+========================================= */
+
+.login-box {
+    padding:
+            60px 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.98
+            );
+}
+
+
+.login-form-content {
+    width: 100%;
+
+    max-width: 470px;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.login-heading {
+    margin-bottom: 30px;
+
+    animation:
+            loginFadeUp
+            0.7s ease
+            0.15s both;
+}
+
+
+.login-heading > span {
+    color: #2e7d32;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+}
+
+
+.login-heading h2 {
+    margin:
+            7px 0 8px;
+
+    color: #202020;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.7px;
+}
+
+
+.login-heading p {
+    margin: 0;
+
+    color: #7b7b7b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+
+.login-field-one {
+    animation:
+            loginFadeUp
+            0.7s ease
+            0.25s both;
+}
+
+
+.login-field-two {
+    animation:
+            loginFadeUp
+            0.7s ease
+            0.35s both;
+}
+
+
+@keyframes loginFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0);
+    }
+
+}
+
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #303530;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   INPUT WRAPPER
+========================================= */
+
+.login-input-wrapper {
+    position: relative;
+}
+
+
+.login-input-symbol {
+    position: absolute;
+
+    top: 50%;
+    left: 15px;
+
+    transform:
+            translateY(-50%);
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eef7eb;
+
+    color: #2e7d32;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    pointer-events: none;
+}
