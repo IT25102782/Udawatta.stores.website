@@ -367,6 +367,91 @@ const MyOrders = () => {
                                             </div>
 
 
+                                            {/* DETAILS */}
+
+                                            <div className="order-detail-grid">
+
+
+                                                {/* ITEMS */}
+
+                                                <div className="order-detail-block">
+
+                                                    <span>
+                                                        📦 Items
+                                                    </span>
+
+                                                    <p>
+                                                        {
+                                                            order.orderItems ||
+                                                            "No items available"
+                                                        }
+                                                    </p>
+
+                                                </div>
+
+
+                                                {/* ADDRESS */}
+
+                                                <div className="order-detail-block">
+
+                                                    <span>
+                                                        📍 Delivery Address
+                                                    </span>
+
+                                                    <p>
+
+                                                        {
+                                                            order.address ||
+                                                            "N/A"
+                                                        }
+
+                                                        {
+                                                            order.postalCode &&
+                                                            `, ${order.postalCode}`
+                                                        }
+
+                                                    </p>
+
+                                                </div>
+
+
+                                                {/* CONTACT */}
+
+                                                <div className="order-detail-block">
+
+                                                    <span>
+                                                        📞 Contact
+                                                    </span>
+
+                                                    <p>
+                                                        {
+                                                            order.phone ||
+                                                            "N/A"
+                                                        }
+                                                    </p>
+
+                                                </div>
+
+
+                                                {/* DATE */}
+
+                                                <div className="order-detail-block">
+
+                                                    <span>
+                                                        🕒 Order Date
+                                                    </span>
+
+                                                    <p>
+                                                        {
+                                                            formatDate(
+                                                                order.orderDate
+                                                            )
+                                                        }
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
 
 
                                             {/* FOOTER */}
