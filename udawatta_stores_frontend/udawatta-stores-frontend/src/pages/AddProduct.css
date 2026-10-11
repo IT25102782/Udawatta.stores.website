@@ -1,0 +1,199 @@
+.add-product-page {
+    min-height: 100vh;
+
+    padding: 42px;
+
+    background: #f4f7f3;
+
+    color: #222;
+}
+
+.add-product-top {
+    max-width: 1150px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.add-product-top > div > span,
+.add-form-heading span,
+.preview-label {
+    color: #2e7d32;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.add-product-top h1 {
+    margin: 5px 0 7px;
+
+    color: #183421;
+
+    font-size: 36px;
+}
+
+.add-product-top p {
+    margin: 0;
+
+    color: #747a75;
+
+    font-size: 13px;
+}
+
+.add-back-button {
+    padding: 11px 17px;
+
+    background: white;
+
+    color: #285e35;
+
+    border:
+            1px solid #d7e1d4;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* LAYOUT */
+
+.add-product-layout {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(280px, 0.7fr);
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+
+/* FORM */
+
+.add-product-form,
+.add-product-preview {
+    padding: 30px;
+
+    background: white;
+
+    border:
+            1px solid #e4ebe2;
+
+    border-radius: 17px;
+
+    box-shadow:
+            0 10px 30px
+            rgba(0, 0, 0, 0.04);
+}
+
+.add-form-heading {
+    margin-bottom: 25px;
+}
+
+.add-form-heading h2,
+.add-product-preview h2 {
+    margin: 5px 0 0;
+
+    font-size: 23px;
+}
+
+.add-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+.add-product-form label {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    color: #444;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.add-product-form input,
+.add-product-form textarea {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    background: #fbfcfa;
+
+    border:
+            1px solid #dce5d9;
+
+    border-radius: 8px;
+
+    color: #333;
+
+    font-family: inherit;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+.add-product-form input {
+    height: 46px;
+}
+
+.add-product-form textarea {
+    resize: vertical;
+
+    min-height: 115px;
+}
+
+.add-product-form input:focus,
+.add-product-form textarea:focus {
+    background: white;
+
+    border-color: #2e7d32;
+
+    box-shadow:
+            0 0 0 3px
+            rgba(46, 125, 50, 0.08);
+}
+
+.add-full-field {
+    margin-top: 18px;
+}
+
+.add-full-field small {
+    color: #999;
+
+    font-weight: 400;
+
+    font-size: 9px;
+}
+
+
