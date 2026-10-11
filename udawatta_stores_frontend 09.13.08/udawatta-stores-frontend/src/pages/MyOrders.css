@@ -1,0 +1,187 @@
+/* =====================================
+   MY ORDERS
+===================================== */
+
+.my-orders-page {
+    min-height: 100vh;
+
+    padding-bottom: 80px;
+
+    background: #f8faf7;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.my-orders-header {
+    padding: 55px 20px;
+
+    text-align: center;
+
+    background:
+            radial-gradient(
+                    circle at top,
+                    rgba(76, 175, 80, 0.12),
+                    transparent 48%
+            ),
+            #edf6ea;
+}
+
+.my-orders-header > span {
+    color: #2e7d32;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.my-orders-header h1 {
+    margin: 8px 0 10px;
+
+    color: #202020;
+
+    font-size: 43px;
+
+    letter-spacing: -1px;
+}
+
+.my-orders-header p {
+    max-width: 520px;
+
+    margin: auto;
+
+    color: #707070;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   CONTENT
+===================================== */
+
+.my-orders-content {
+    max-width: 1050px;
+
+    margin: auto;
+
+    padding: 50px 25px;
+}
+
+.orders-top-row {
+    margin-bottom: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 20px;
+}
+
+.orders-top-row span {
+    color: #2e7d32;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.orders-top-row h2 {
+    margin: 5px 0 0;
+
+    color: #222;
+
+    font-size: 29px;
+}
+
+.orders-top-row > strong {
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =====================================
+   ORDER LIST
+===================================== */
+
+.modern-orders-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.modern-order-card {
+    overflow: hidden;
+
+    background: white;
+
+    border:
+            1px solid #e5ece2;
+
+    border-radius: 18px;
+
+    box-shadow:
+            0 10px 30px
+            rgba(31, 77, 35, 0.05);
+
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+}
+
+.modern-order-card:hover {
+    transform:
+            translateY(-4px);
+
+    box-shadow:
+            0 16px 38px
+            rgba(31, 77, 35, 0.09);
+}
+
+
+/* =====================================
+   CARD HEADER
+===================================== */
+
+.modern-order-header {
+    padding: 22px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #fbfcfa;
+
+    border-bottom:
+            1px solid #edf1eb;
+}
+
+.order-number-label {
+    color: #999;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.modern-order-header h3 {
+    margin: 4px 0 0;
+
+    color: #222;
+
+    font-size: 21px;
+}
+
+
