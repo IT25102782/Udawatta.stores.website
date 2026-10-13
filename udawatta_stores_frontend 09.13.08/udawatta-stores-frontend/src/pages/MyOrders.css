@@ -315,3 +315,173 @@
 }
 
 
+/* =====================================
+   EMPTY
+===================================== */
+
+.my-orders-empty {
+    min-height: 420px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.empty-orders-icon {
+    width: 90px;
+    height: 90px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #edf6ea;
+
+    border-radius: 50%;
+
+    font-size: 40px;
+}
+
+.my-orders-empty h2 {
+    margin: 0 0 9px;
+
+    font-size: 28px;
+}
+
+.my-orders-empty p {
+    max-width: 390px;
+
+    margin: 0 0 25px;
+
+    color: #777;
+
+    line-height: 1.6;
+}
+
+.orders-shop-button {
+    padding: 13px 24px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition:
+            0.3s ease;
+}
+
+.orders-shop-button:hover {
+    background: #1b5e20;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================
+   LOADING
+===================================== */
+
+.orders-loading {
+    min-height: 65vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #777;
+}
+
+.orders-spinner {
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 15px;
+
+    border:
+            4px solid #e0ebe0;
+
+    border-top-color:
+            #2e7d32;
+
+    border-radius: 50%;
+
+    animation:
+            ordersSpin
+            0.8s linear infinite;
+}
+
+@keyframes ordersSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.orders-error {
+    margin-bottom: 20px;
+
+    padding: 12px 15px;
+
+    background: #fee2e2;
+
+    color: #a72b2b;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 650px) {
+
+    .my-orders-header {
+        padding: 40px 20px;
+    }
+
+    .my-orders-header h1 {
+        font-size: 34px;
+    }
+
+    .my-orders-content {
+        padding:
+                35px 17px;
+    }
+
+    .order-detail-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        padding: 20px;
+    }
+
+    .modern-order-header {
+        padding: 18px 20px;
+    }
+
+    .modern-order-footer {
+        padding: 17px 20px;
+    }
+
+}
