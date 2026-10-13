@@ -365,3 +365,59 @@
 }
 
 
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .add-product-page {
+        padding: 28px 18px;
+    }
+
+    .add-product-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .add-product-preview {
+        position: static;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .add-product-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .add-back-button {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .add-product-top h1 {
+        font-size: 31px;
+    }
+
+    .add-product-form,
+    .add-product-preview {
+        padding: 22px;
+    }
+
+    .add-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .add-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .add-form-actions a,
+    .add-form-actions button {
+        width: 100%;
+
+        text-align: center;
+    }
+}
