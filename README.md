@@ -1,4 +1,3 @@
-
 # Udawatta Stores – Online Grocery Shopping System
 
 **SE2012 – Object Oriented Analysis and Design (OOAD) | Group 39**
